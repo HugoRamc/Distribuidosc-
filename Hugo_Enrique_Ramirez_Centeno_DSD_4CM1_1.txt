@@ -118,7 +118,7 @@ Asimismo escriba las funciones que impriman el valor almacenado en la clase y en
 Centigrados, Kelvin o Fahrenheit, según lo solicite el usuario. Escriba una función principal para
 probar la clase
 */
-
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 #ifndef Temperatura_
 #define Temperatura_
 class Temperatura
@@ -135,7 +135,7 @@ public:
 };
 
 #endif
-
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&66
 
 #include "temperatura.h"
 #include <iostream>
@@ -161,7 +161,7 @@ void Temperatura::setTempFahrenheit(){
 void Temperatura::setTempKelvin(){
     cout << "La temperatura "<< tempK<< " en Kelvin es: "<<tempK<<endl;
 }
-
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 #include "temperatura.h"
 #include <iostream>
 using namespace std;
