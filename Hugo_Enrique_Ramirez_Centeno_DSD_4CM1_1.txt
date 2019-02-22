@@ -1,0 +1,635 @@
+****************************************************************************************************************************************************************
+//Ejercicio 1 
+//Autor : Hugo Ramírez Centeno
+//Asignatura: Diseño de Sistemas Distribuidos
+//Boleta: 2016630317
+
+
+/*1.- Se desea calcular la raiz cuadrada de un número entero utilizando
+el algoritmo babilónico: Investigue en internet el algoritmo y prográmelo,
+haciendo n del tipo double y el resultado con cuatro decimales
+*/
+
+#include <iostream>
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+    int num;
+    cout << "Calular la Raiz Cuadrada Algoritmo Babilónico \nIntroduce un numero: \n";
+    cin >> num;
+
+    double h = 0.00001, raiz = h;
+    while(raiz * raiz < num){
+        raiz+=h;
+
+    }
+
+    cout.setf(ios::fixed);	//notacion en punto fijo
+	cout.setf(ios::showpoint);	//sets the showpoint format flag for the str stream
+	cout.precision(4);	//Dos decimales
+    cout << "La raiz de "<<num <<" es: "<<raiz << endl;
+    
+}
+
+*****************************************************************************************************************************************************************
+
+//Ejercicio 2
+
+//Autor : Hugo Ramírez Centeno
+//Asignatura: Diseño de Sistemas Distribuidos
+//Boleta: 2016630317
+
+/*
+Escriba un programa que imprima la altura de un edicicio, si se conoce
+el tiempo que tardó una peota de tenis desde que se dejo caer en la parte
+mas alta del edificio y hasta llegar al piso
+*/
+
+//datos iniciales
+//V0 = 0
+//X0 = 0
+//g = 9.81
+//formula para determinar la altura de un edificio dado el tiempo
+//A = g*t*t/2
+
+#include <iostream>
+using namespace std;
+
+int main(int argc, char const *argv[])
+{   
+    double const g = 9.81;
+    double tiempo,altura;
+
+    cout << "Bienvenido a calcula la alutura de un edificio\n Introduce el tiempo tardado de la pelota en tocar el suelo\n";
+    cin >> tiempo;
+    altura  = g*tiempo*tiempo/2;
+
+
+    cout << "La altura del edificio es: " << altura << "\n";
+
+    return 0;
+}
+
+*******************************************************************************************************************************************************************
+//Ejercicio 3
+
+//Autor : Hugo Ramírez Centeno
+//Asignatura: Diseño de Sistemas Distribuidos
+//Boleta: 2016630317
+
+/*
+Escriba un programa que reciba del usuario un valor enterno del tiempo en segundos
+, y que imprima su equivalente en horas, minutos y segundos Por ejemplo si el usuario introduce 50381, 
+entonces el programa debe imprimir:13 horas, 59 minutos y 41 segundos.
+*/
+
+#include <iostream>
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+    int horas, minutos, segundos,aux;
+    int tiempo;
+    cout << "Convertir el tiempo\nIntroduce el tiempo en segundos\n";
+    cin >> tiempo;
+    segundos = tiempo % 60;
+    minutos = tiempo/ 60;
+
+    if (minutos >= 60) {
+        horas = minutos / 60;
+        minutos = minutos % 60;  
+
+    }else{
+        horas = 0;
+
+    }
+
+    cout <<  "El tiempo convertido es: "<< horas << " horas, "<<minutos<<" minutos y "<< segundos << " segundos.\n";
+    
+}
+
+*****************************************************************************************************************************************************************
+//Ejercicio 4
+4.- Defina una clase Temperatura que almacene de manera interna un valor de temperatura en
+grados Kelvin. También elabore las funciones setTempKelvin, setTempFahrenheit y setTempCelsius que
+tomen la temperatura en la escala especificada por el usuario y la almacenen en grados Kelvin.
+Asimismo escriba las funciones que impriman el valor almacenado en la clase y en los grados
+Centigrados, Kelvin o Fahrenheit, según lo solicite el usuario. Escriba una función principal para
+probar la clase
+*/
+
+#ifndef Temperatura_
+#define Temperatura_
+class Temperatura
+{
+private:
+    float tempK;
+    float tempC;
+    float tempF;
+public:
+    Temperatura(float);
+    void setTempKelvin();
+    void setTempFahrenheit();
+    void setTempCelsius();
+};
+
+#endif
+
+
+#include "temperatura.h"
+#include <iostream>
+using namespace std;
+
+Temperatura::Temperatura(float temk){
+    tempK = temk;
+}
+
+void Temperatura::setTempCelsius(){
+    float celsius = tempK - 273;
+    tempC = celsius;
+    cout << "La temperatura "<< tempK<< " en Celsius es: "<<celsius<<endl;
+
+}
+
+void Temperatura::setTempFahrenheit(){
+    float fahren = ((tempK - 273) * 9/5)+32;
+    tempF = fahren;
+    cout << "La temperatura "<< tempK<< " en Fahrenhet es: "<<fahren<<endl;
+}
+
+void Temperatura::setTempKelvin(){
+    cout << "La temperatura "<< tempK<< " en Kelvin es: "<<tempK<<endl;
+}
+
+#include "temperatura.h"
+#include <iostream>
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+    int opc;
+    float temp;
+    cout << "Introduce la escala deseada para trabajar\n1.- Kelvin\n2.-Celsius\n3.-Fahrenheit"<<endl;
+    cin >> opc;
+
+    if(opc == 1 || opc == 2 || opc==3){
+        cout << "Introduce la temperatura"<<endl;
+        cin >> temp;
+
+        if(opc == 2){//opcion de grados celsius
+            temp =  temp+273;
+        }else if(opc== 3){
+            temp = ((temp-32)*5/9)+273;
+        }
+
+        Temperatura Tem(temp);
+        Tem.setTempCelsius();
+        Tem.setTempFahrenheit();
+        Tem.setTempKelvin();
+
+    }else{
+        cout << "Introduce una opcion correcta"<<endl;
+
+    }
+
+
+    return 0;
+}
+
+
+
+***********************************************************************************************************************************************************
+
+//Ejercicio 5
+//Autor: Hugo Enrique Ramírez Centeno
+//Grupo: 4CM1
+
+/*
+5.- Defina una clase llamada Fraccion, la cual almacena un numerador y un denominador enteros.
+Debe incluir una función para que el usuario pueda inicializar a ambos, así como una función que
+devuelva el resultado de la división entre el numerador y el denominador como un double. Por último
+debe existir una función que devuelva a la fracción en su mínima expresión. Por ejemplo la fracción
+18/15 deberá imprimirse como 6/5. Pruebe la clase con el código mínimo en el programa principal.
+*/
+
+//Autor: Hugo Enrique Ramírez Centeno
+//Grupo: 4CM1
+
+#ifndef Fraccion_
+#define Fraccion_
+class Fraccion
+{
+private:
+    int numerador;
+    int denominador; 
+public:
+    void setNumerador(int);
+    void setDenominador(int);
+    void resolverFraccion();
+    void reducirFraccion();
+};
+
+#endif
+
+
+//Autor: Hugo Enrique Ramírez Centeno
+//Grupo: 4CM1
+#include "Fraccion.h"
+#include <iostream>
+using namespace std;
+
+void Fraccion::setNumerador(int num){
+    numerador = num;
+}
+
+void Fraccion::setDenominador(int den){
+    denominador = den;
+}
+
+void Fraccion::resolverFraccion(){
+    double res = (double)numerador / (double)denominador;
+    cout << "El Resultado de la division de "<< numerador<<"/"<<denominador<<" es: "<<res<<endl;
+}
+
+int mcd(int x, int y)
+{
+    return y ? mcd(y, x % y) : x;
+}
+
+void Fraccion::reducirFraccion(){
+    int div = mcd(numerador,denominador);
+    int num = numerador/div;
+    int den = denominador/div;
+    cout << "Fraccion "<< numerador<<"/"<<denominador<<" reducido es: "<<num<<"/"<<den<<endl;
+
+}
+
+#include "Fraccion.h"
+#include <iostream>
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+    int num,den;
+    cout << "Bienvenido a las Fracciones:\nIntroduzca el numerador"<<endl;
+    cin >> num;
+
+    cout << "Introduzca el denominador"<<endl;
+    cin >> den;
+    Fraccion F;
+    F.setNumerador(num);
+    F.setDenominador(den);
+    F.resolverFraccion();
+    F.reducirFraccion();
+
+    return 0;
+}
+
+
+****************************************************************************************************************************************************************
+
+//Ejercicio 6
+/*6.- Utilice composición para elaborar una clase Ortoedro la cual se compone de 6 objetos
+Rectangulo, y donde cada objeto Coordenada es de tres dimensiones. Se debe disponer de los
+metodos: obtieneVertices, obtieneArea y obtieneVolumen para el área de la superficie y el volumen.
+La inicialización del objeto se debe dar mediante las 2 coordenadas de los vértices opuestos donde
+el primer vértice está cerca del origen y el segundo lejos, dentro ambos del primer octante.
+*/
+
+#ifndef Coordenada_
+#define Coordenada_
+#include <math.h>
+
+class Coordenada
+{
+    private:
+    double x;
+    double y;
+    double z;
+    public:
+    Coordenada(double = 0, double = 0,double=0);
+    double obtenerX();
+    double obtenerY();
+    double obtenerZ();
+ };
+
+#endif
+
+#include "Coordenada.h"
+#include <iostream>
+using namespace std;
+
+Coordenada::Coordenada(double xx, double yy ,double zz) //: x(xx), y(yy)
+{ 
+   x = xx;
+   y = yy;
+   z = zz;
+}
+
+double Coordenada::obtenerX()
+{
+   return x;
+}
+
+double Coordenada::obtenerY()
+{
+ return y;
+}
+
+double Coordenada::obtenerZ(){
+   return z;
+}
+
+#include "Coordenada.h"
+#ifndef Rectangulo_
+#define Rectangulo_
+class Rectangulo
+ {
+    private:
+        Coordenada superiorIzq;
+        Coordenada inferiorDer;
+    public:
+        Rectangulo();
+        Rectangulo(double xSupIzq, double ySupIzq, double xInfDer, double yInfDer);
+        Rectangulo(Coordenada sup, Coordenada inf);
+    void imprimeEsq();
+    double obtieneArea();
+    Coordenada obtieneSupIzq();
+    Coordenada obtieneInfDer();
+     
+ };
+
+#endif
+
+#include "Rectangulo.h"
+#include <iostream>
+using namespace std;
+
+Rectangulo::Rectangulo() : superiorIzq(0,0), inferiorDer(0,0)
+{ }
+
+
+Rectangulo::Rectangulo(Coordenada sup, Coordenada inf): superiorIzq(sup.obtenerX() ,sup.obtenerY(), sup.obtenerZ()),inferiorDer(inf.obtenerX(), inf.obtenerY(),inf.obtenerZ())
+{ }
+
+void Rectangulo::imprimeEsq()
+{
+    cout << "Para la esquina superior izquierda.\n";
+    cout << "x = " << superiorIzq.obtenerX() << " y = " << superiorIzq.obtenerY() << " z = " << superiorIzq.obtenerZ()<< endl;
+    cout << "Para la esquina inferior derecha.\n";
+    cout << "x = " << inferiorDer.obtenerX() << " y = " << inferiorDer.obtenerY() << " z = " << inferiorDer.obtenerZ()<< endl;
+}
+
+double Rectangulo::obtieneArea(){
+    double ancho = inferiorDer.obtenerX() - superiorIzq.obtenerX();
+    double largo = superiorIzq.obtenerY() - inferiorDer.obtenerY();
+    double profund = superiorIzq.obtenerZ() - inferiorDer.obtenerZ();
+    //cout << "largo "<<largo<<" ancho "<<ancho<<" profund: "<<profund<<endl;
+    double salida;
+    if(ancho==0){
+        salida = largo*profund;
+    }else{
+        if(largo==0){
+            salida = ancho*profund;
+        }else{
+            salida = ancho*largo;
+        }
+    }
+    //cout << "El area es: "<< salida<<endl;
+    if(salida < 0){
+        salida = salida*-1;
+    }
+    return salida;
+    
+}
+
+Coordenada Rectangulo::obtieneSupIzq()
+{
+    return superiorIzq;
+}
+
+Coordenada Rectangulo::obtieneInfDer()
+{
+    return inferiorDer;
+}
+
+
+#include "Rectangulo.h"
+#ifndef ortoedro_
+#define ortoedro_
+class ortoedro
+{
+private:
+    Rectangulo R1,R2,R3,R4,R5,R6;
+    Coordenada esqInfIzq,esqSupDer;
+    bool generaOrtoedro(Coordenada ,Coordenada);
+    void generaRectangulos();
+    void generaVertices();
+public:
+    ortoedro(Coordenada,Coordenada);
+    ortoedro();
+    void obtieneVertices();
+    double obtieneArea();
+    double obtieneVolumen();
+    
+    
+};
+
+#endif
+
+#include "ortoedro.h"
+#include <iostream>
+using namespace std;
+
+
+void ortoedro::generaVertices(){
+    double x,y,z,a,b,c;
+    x = esqInfIzq.obtenerX();
+    y = esqInfIzq.obtenerY();
+    z = esqInfIzq.obtenerZ();
+    a = esqSupDer.obtenerX();
+    b = esqSupDer.obtenerY();
+    c = esqSupDer.obtenerZ();
+    Coordenada C1(x,y,z);
+    Coordenada C2(a,b,c);
+    Coordenada C3(a,b,(c-z));
+    Coordenada C4(a,(b-y,(c-z)));
+    Coordenada C5(a,(b-y),c);
+    Coordenada C6(x,b,c);
+    Coordenada C7(x,b,(c-z));
+    Coordenada C8(a,(b-y),c);
+
+    R1 = Rectangulo(C1,C3);
+    R2 = Rectangulo(C7,C2);
+    R3 = Rectangulo(C4,C2);
+    R4 = Rectangulo(C1,C6);
+    R5 = Rectangulo(C8,C2);
+    R6 = Rectangulo(C1,C5);
+
+    cout << "C1 x = " << C1.obtenerX() << " y = " << C1.obtenerY() << " z = " << C1.obtenerZ()<< endl;
+    cout << "C2 x = " << C2.obtenerX() << " y = " << C2.obtenerY() << " z = " << C2.obtenerZ()<< endl;
+    cout << "C3 x = " << C3.obtenerX() << " y = " << C3.obtenerY() << " z = " << C3.obtenerZ()<< endl;
+    cout << "C4 x = " << C4.obtenerX() << " y = " << C4.obtenerY() << " z = " << C4.obtenerZ()<< endl;
+    cout << "C5 x = " << C5.obtenerX() << " y = " << C5.obtenerY() << " z = " << C5.obtenerZ()<< endl;
+    cout << "C6 x = " << C6.obtenerX() << " y = " << C6.obtenerY() << " z = " << C6.obtenerZ()<< endl;
+
+
+}
+
+
+ortoedro::ortoedro(Coordenada C1,Coordenada C2){
+    esqInfIzq = C2;
+    esqSupDer = C1;
+    generaVertices();
+}
+
+double ortoedro::obtieneVolumen(){
+    double largo = esqSupDer.obtenerX() - esqInfIzq.obtenerX();
+    double ancho = esqSupDer.obtenerY() - esqInfIzq.obtenerY();
+    double profundidad = esqSupDer.obtenerZ() - esqInfIzq.obtenerZ(); 
+
+    return (largo*ancho*profundidad);
+}
+
+double ortoedro::obtieneArea(){
+    double res = R1.obtieneArea()+R2.obtieneArea()+R3.obtieneArea()+R4.obtieneArea()+R5.obtieneArea()+R6.obtieneArea();
+    return res;
+
+}
+
+void ortoedro::obtieneVertices(){
+    generaVertices();
+
+}
+
+
+#include "ortoedro.h"
+#include <iostream>
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+    cout << "Bienvenido a otroedro 3D"<<endl;
+    ortoedro ort = ortoedro(Coordenada(2,3,0),Coordenada(5,1,2));
+
+    cout << "El área del ortoedro es: "<<ort.obtieneArea()<<endl;
+    cout << "El Volumen del ortoedro es: "<<ort.obtieneVolumen()<<endl;
+
+    return 0;
+}
+
+*************************************************************************************************************************************************
+//Ejercicio 7
+/*7.-Elabore un programa para encontrar los números primos menores al valor N que introduzca el
+usuario, mediante el algoritmo de la Criba de Eratóstenes:
+http://es.wikipedia.org/wiki/Criba_de_Erat%C3%B3stenes
+Use un template vector para almacenar objetos de una clase, cuyos miembros son los números
+enteros y un dato tipo bool, para descartar al objeto en el caso de que no sea primo
+(originalmente todos los elementos del vector tienen un valor true en este dato miembro).
+*/
+
+
+#ifndef Numero_
+#define Numero_
+class Numero
+{
+private:
+    bool primo = false;
+    int num;
+public:
+    Numero(int);
+    void setNoPrimo();
+    int getNum();
+    bool isPrimo();
+    
+};
+#endif
+
+
+#include "numero.h"
+
+Numero::Numero(int val){
+    num = val;
+    primo = true;
+}
+
+void Numero::setNoPrimo(){
+    primo = false;
+}
+
+int Numero::getNum(){
+    return num;
+}
+
+bool Numero::isPrimo(){
+    return primo;
+}
+
+#include <iostream>
+#include <vector>
+#include <math.h>
+#include "numero.h"
+using namespace std;
+
+void imprimeNums(){
+
+}
+
+int main(int argc, char const *argv[])
+{
+    int n,op,aux,i,j;
+    cout << "Bienvenido a numeros primos por la Criba de eratostenes\nIntroduce una N"<<endl;
+    cin >> n;
+
+    vector<Numero> nums;
+    nums.reserve(n-1);
+
+    for(i=0;i<n-1;++i){
+        nums[i]=i+2;
+    }
+
+    //ejemplo del arreglo [2,3,4,5,6,7,8,9,10]
+    for(i=0;i<n-1;++i){
+        op = pow(nums[i].getNum(),2);
+        if(op < n){//si el cuadrado del numero que estamos analizando es mayor a la N, 
+                    //termina el algoritmo y todos los numeros anteriores son declarados primos
+            if(nums[i].isPrimo()){//caso 0 es no asignado
+                //recorremos el arreglo en multiplos del numero elegido y los numeros en los que caiga son los que son no primos
+                aux = nums[i].getNum();
+                for(j=(i+aux);j<n-1;j+=aux){
+                    nums[j].setNoPrimo();
+                }
+            }
+        }else{
+            break;
+        }
+
+
+    }
+
+    for(i=0;i<n-1;++i){
+        if(nums[i].isPrimo()){   
+            cout << "" << nums[i].getNum()<<endl;
+        }
+    }
+
+    return 0;
+}
+***************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

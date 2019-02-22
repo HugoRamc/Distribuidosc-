@@ -13,8 +13,4 @@ public:
     void setTempCelsius();
 };
 
-
-
-
-
 #endif

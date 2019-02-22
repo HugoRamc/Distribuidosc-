@@ -10,10 +10,5 @@ int main(int argc, char const *argv[])
     cout << "El área del ortoedro es: "<<ort.obtieneArea()<<endl;
     cout << "El Volumen del ortoedro es: "<<ort.obtieneVolumen()<<endl;
 
-
-    
-        
-
-
     return 0;
 }
