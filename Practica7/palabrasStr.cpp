@@ -41,5 +41,24 @@ int main(int argc, char const *argv[])
 
     }
 
+    int flag = 0;
+    int posicion = cadenota.length();
+    for(int i=0;i<posicion;++i){
+        if(cadenota[i] == 'I'){
+            i++;
+            if(cadenota[i]=='P'){
+                i++;
+                if(cadenota[i]=='N'){
+                    cout << "Se ha encontrado la coincidencia IPN"<<endl;
+                    flag = 1;
+                }
+            }
+        }
+    }
+
+    if(flag == 0){
+        cout << "no se encontró la coincidencia de IPN"<<endl;
+    }
+
     return 0;
 }
