@@ -9,7 +9,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <arpa/inet.h>
-#include "PaqueteDatagrama.h"
 using namespace std;
 
 SocketDatagrama::SocketDatagrama(int puerto){
@@ -24,25 +23,28 @@ SocketDatagrama::~SocketDatagrama(){
   close(s);
 }
 //Recibe un paquete tipo datagrama proveniente de este socket
-int SocketDatagrama::recibe(PaqueteDatagrama &p){
+
+int SocketDatagrama::recibe(struct mensaje &p){
 
   socklen_t d = sizeof (direccionForanea);
   printf("ESPERANDO RECIBIR...\n" );
-  int x = recvfrom(s,p.obtieneDatos(),p.obtieneLongitud(),0,(struct sockaddr *)&direccionForanea, &d);
+  int x = recvfrom(s,(struct mensaje *)&p,sizeof(struct mensaje),0,(struct sockaddr *)&direccionForanea, &d);
   printf("Recibimos mensaje de la Ip: %s\n", inet_ntoa(direccionForanea.sin_addr));
   
-  p.inicializaIp(inet_ntoa(direccionForanea.sin_addr));
-  p.inicializaPuerto(ntohs(direccionForanea.sin_port));
+  //p.inicializaIp(inet_ntoa(direccionForanea.sin_addr));
+  //p.inicializaPuerto(ntohs(direccionForanea.sin_port));
 
   return x;
 }
+
+
 //Envía un paquete tipo datagrama desde este socket
-int SocketDatagrama::envia(PaqueteDatagrama &p){
+int SocketDatagrama::envia(struct mensaje &p){
 
   bzero((char*)&direccionForanea,sizeof(direccionForanea));
   direccionForanea.sin_family = AF_INET;
-  direccionForanea.sin_addr.s_addr=inet_addr(p.obtieneDireccion());
-  direccionForanea.sin_port=htons(p.obtienePuerto());
-  int x = sendto(s,p.obtieneDatos(),p.obtieneLongitud(),0,(struct sockaddr *)&direccionForanea,sizeof(direccionForanea));
+  direccionForanea.sin_addr.s_addr=inet_addr(p.IP);
+  direccionForanea.sin_port=htons(p.puerto);
+  int x = sendto(s,(struct mensaje *)&p,sizeof(struct mensaje),0,(struct sockaddr *)&direccionForanea,sizeof(direccionForanea));
 return x;
 }

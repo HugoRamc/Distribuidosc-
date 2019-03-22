@@ -1,0 +1,6 @@
+servidor: respuesta.o servidor.cpp 
+	g++ servidor.cpp respuesta.o -o servidor
+respuesta.o: SocketDatagrama.o respuesta.cpp
+	g++ respuesta.cpp -c
+SocketDatagrama.o: SocketDatagrama.cpp
+	g++ SocketDatagrama.cpp -c

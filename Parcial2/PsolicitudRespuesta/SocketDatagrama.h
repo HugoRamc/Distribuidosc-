@@ -1,19 +1,19 @@
-#ifndef SOCKETDDAT_H_
-#define SOCKETDDAT_H_
+#ifndef SocketDatagrama_
+#define SocketDatagrama_
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
-#include "PaqueteDatagrama.h"
+#include "mensaje.h"
 using namespace std;
 class SocketDatagrama{
 public:
   SocketDatagrama(int);
   ~SocketDatagrama();
   //Recibe un paquete tipo datagrama proveniente de este socket
-  int recibe(PaqueteDatagrama &p);
+  int recibe(struct mensaje &p);
   //Envía un paquete tipo datagrama desde este socket
-  int envia(PaqueteDatagrama &p);
+  int envia(struct mensaje &p);
 private:
   struct sockaddr_in direccionLocal;
   struct sockaddr_in direccionForanea;

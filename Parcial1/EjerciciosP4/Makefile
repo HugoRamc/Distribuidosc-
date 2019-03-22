@@ -1,4 +1,4 @@
-ejercicio6: ejercicio6.cpp ortoedro.o
+ejercicio6:	ejercicio6.cpp ortoedro.o
 	g++ ejercicio6.cpp ortoedro.o Rectangulo.o Coordenada.o -o ejercicio6
 ortoedro.o: ortoedro.cpp Rectangulo.o Coordenada.o
 	g++ ortoedro.cpp -c
